@@ -1,0 +1,130 @@
+//números primos
+public  boolean numeroPrimo (int num) {
+
+boolean primo = false;
+     int contador = 2;
+        
+     if (num==2) {primo=true;}
+     		else if (num%2==0) {primo=false;}
+          else if (num%2!=0) {
+          		while (contador<num) {
+               		if (num%contador==0) { 
+contador = num + 1;
+                    		primo=false;
+               		}
+              	 	else {
+                    		contador++;
+if (num == contador){primo=true;}
+          		}
+     		}
+     }
+return primo;
+}
+
+
+//divisores
+public  void divisores (int numero){
+int antecessor = 1;
+     int contador = 0;
+     int divisor;
+
+     System.out.println("\nO número " + numero + " é divisível por: ");
+     while (numero >=antecessor) {
+     		if (numero%antecessor==0){
+          		divisor = antecessor;
+               System.out.println(divisor);
+               contador = contador + 1;
+           }
+          antecessor++;
+     }
+System.out.println("\nO número " + numero + " tem " + contador + " divisores");
+}
+
+
+//soma Divisores
+public  int somaD (int num){
+int soma = 0;
+     int aux = 1;
+        
+     while (aux<=num) {
+if (num%aux==0){soma = soma+aux;}
+          aux++; //gera o antecessor e controla o n de repetições
+     }
+     return soma;
+}
+
+
+//soma Divisores Próprios
+//divisores não contando o próprio número
+public  int somaDP (int num){
+int soma = 0;
+     int aux = 1;
+        
+     while (aux<num) {
+if (num%aux==0){soma = soma+aux;}
+     		aux++; //gera o antecessor e controla o n de repetições
+     }
+     return soma;
+}
+
+
+//máximo Divisor Comum (MDC)
+public  int mdc (int a, int b) { 
+//a = divisor, b = dividendo
+int resto = 0;
+     int aux = 0;
+if (b > a){ //caso b seja maior que a, inverte os valores
+     		aux = a;
+          a = b;
+          b = aux;
+    }
+     while (b != 0) {
+          resto = a%b;
+          a = b; 
+          b = resto;
+     }
+        
+return a;
+}
+
+//primos entre sí
+//primos entre sí (mdc = 1)
+public  boolean primosES (int a, int b){
+if (mdc(a,b)==1) return true;
+     		else return false;
+}
+
+
+//números Amigos
+//cada um deles é a soma dos divisores próprios do outro.
+public  boolean amigos( int num1, int num2) {
+boolean aux = true;
+
+     int soma1=somaDP(num1);
+     int soma2=somaDP(num2);
+
+     if ((num1==soma2)&&(num2==soma1)) return aux;
+     else { aux=false; return aux; }
+}
+
+
+//número Abundante
+//um número é abundante se a soma de seus divisores próprios é superior a ele mesmo
+public  boolean abundante (int num){
+if (somaDP(num) > num) return true;
+     		else return false;
+}
+
+//número Perfeito
+//Um número é igual à  soma de seus divisores próprios. 
+public  boolean perfeito( int num) { 
+if ( somaDP(num) == num ) return true;
+     else return false;
+}
+
+//número Defectivo
+//Um número natural é defectivo se a soma de seus dp é inferior 
+public  boolean defectivo( int num) {
+if ( somaDP(num) < num ) return true;
+     else return false;
+}
